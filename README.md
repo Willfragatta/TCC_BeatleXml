@@ -34,7 +34,7 @@ Na pasta em que o repositório deve ficar:
 
 ```powershell
 git clone https://github.com/Willfragatta/TCC_BeatleXml.git
-cd TCC-BeatleXml
+cd TCC_BeatleXml
 docker compose up --build
 ```
 
