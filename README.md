@@ -33,7 +33,7 @@ A aplicação web atende o navegador em `http://localhost:8000`, autentica os us
 Na pasta em que o repositório deve ficar:
 
 ```powershell
-git clone https://github.com/Willfragatta/TCC-BeatleXml.git
+git clone https://github.com/Willfragatta/TCC_BeatleXml.git
 cd TCC-BeatleXml
 docker compose up --build
 ```
