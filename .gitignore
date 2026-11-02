@@ -1,0 +1,15 @@
+*.pfx
+*.p12
+*.pem
+*.key
+.env
+venv/
+.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+logs/
+data/
+*.exe
+static/releases/
+pgdata/

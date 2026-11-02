@@ -1,0 +1,79 @@
+<div id="toast-container" class="fixed top-20 right-4 z-50 space-y-2"></div>
+
+<script>
+class ToastManager {
+    constructor() {
+        this.container = document.getElementById('toast-container');
+        if (!this.container) {
+            this.container = document.createElement('div');
+            this.container.id = 'toast-container';
+            this.container.className = 'fixed top-20 right-4 z-50 space-y-2';
+            document.body.appendChild(this.container);
+        }
+    }
+
+    show(message, type = 'info', duration = 3000) {
+        const toast = document.createElement('div');
+        const id = 'toast-' + Date.now();
+        toast.id = id;
+        
+        const colors = {
+            'success': 'bg-green-500',
+            'error': 'bg-red-500',
+            'warning': 'bg-yellow-500',
+            'info': 'bg-blue-500'
+        };
+        
+        const icons = {
+            'success': 'fa-check-circle',
+            'error': 'fa-exclamation-circle',
+            'warning': 'fa-exclamation-triangle',
+            'info': 'fa-info-circle'
+        };
+        
+        toast.className = `${colors[type] || colors.info} text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3 min-w-[300px] max-w-md transform transition-all duration-300 translate-x-full opacity-0`;
+        toast.innerHTML = `
+            <i class="fas ${icons[type] || icons.info} text-xl"></i>
+            <span class="flex-1 text-sm font-medium">${message}</span>
+            <button onclick="this.parentElement.remove()" class="text-white hover:text-gray-200">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        this.container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            toast.classList.add('translate-x-0', 'opacity-100');
+        }, 10);
+        
+        setTimeout(() => {
+            toast.classList.add('translate-x-full', 'opacity-0');
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+    }
+
+    success(message, duration) {
+        this.show(message, 'success', duration);
+    }
+
+    error(message, duration) {
+        this.show(message, 'error', duration || 5000);
+    }
+
+    warning(message, duration) {
+        this.show(message, 'warning', duration);
+    }
+
+    info(message, duration) {
+        this.show(message, 'info', duration);
+    }
+}
+
+const toast = new ToastManager();
+
+window.mostrarToast = function(message, type) {
+    toast.show(message, type);
+};
+</script>
+
